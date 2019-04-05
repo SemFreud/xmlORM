@@ -1,4 +1,7 @@
-package com.flyd.loadObj;
+package com.flyd.loadobj;
+
+import com.flyd.utils.CharasetUtil;
+import com.flyd.utils.CustomClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -9,13 +12,28 @@ import java.lang.reflect.Method;
  *
  */
 public class ClassLoadTest {
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Class clazz = Class.forName("com.flyd.genobj.model.TestClass");
 
+    public static String printStringMethod(String className,String filed){
+        Object obj = null;
+        try {
 
-        Method[] methods = clazz.getDeclaredMethods();
-        printGetMethods(clazz, methods);
+            Class clazz = Class.forName(CustomClass.modelPath+"."+className);
+            Method method = clazz.getMethod("get"+ CharasetUtil.toUp(filed));
+            obj = clazz.newInstance();
+            return (String)method.invoke(obj,null);
 
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -37,6 +55,7 @@ public class ClassLoadTest {
             }
         }
     }
+
 
     public static void printSetMethods(Method[] methods){
         for (Method method:methods)
