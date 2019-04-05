@@ -1,5 +1,8 @@
 package com.flyd.genobj;
 
+import com.flyd.utils.CharasetUtil;
+import com.flyd.utils.CustomClass;
+
 /**
  * 构建类的信息
  */
@@ -7,10 +10,10 @@ public class JavaBuilder {
     private static StringBuffer stringBuilder = new StringBuffer();
     private final String TABSPLIT = "    ";
 
-    public String buildJava(String packName ,String className,String... fileds){
+    public String buildJava(String className,String... fileds){
         JavaBuilder builder = new JavaBuilder();
 
-        builder.genPackInfo(packName);
+        builder.genPackInfo(CustomClass.modelPackagePath);
         builder.genClassInfoTop(className);
         builder.genFiledsInfo(fileds);
         builder.genGetMethodsInfo(fileds);
@@ -39,7 +42,7 @@ public class JavaBuilder {
     private StringBuffer genSetMethodsInfo(String... fileds){
         for(String filed:fileds){
 
-            stringBuilder.append("\n").append(TABSPLIT).append("public void set").append(toUp(filed)).append("(String ").append(filed).append(") {\n");
+            stringBuilder.append("\n").append(TABSPLIT).append("public void set").append(CharasetUtil.toUp(filed)).append("(String ").append(filed).append(") {\n");
             stringBuilder.append(TABSPLIT).append(TABSPLIT).append("this.").append(filed).append("=").append(filed).append(";\n");
             stringBuilder.append(TABSPLIT).append("}\n");
         }
@@ -48,7 +51,7 @@ public class JavaBuilder {
 
     private StringBuffer genGetMethodsInfo(String... fileds){
         for(String filed:fileds){
-            stringBuilder.append("\n").append(TABSPLIT).append("public String get").append(toUp(filed)).append("() {\n");
+            stringBuilder.append("\n").append(TABSPLIT).append("public String get").append(CharasetUtil.toUp(filed)).append("() {\n");
             stringBuilder.append(TABSPLIT).append(TABSPLIT).append("return this.").append(filed).append(";\n");
             stringBuilder.append(TABSPLIT).append("}\n");
         }
@@ -60,11 +63,5 @@ public class JavaBuilder {
     }
 
 
-    private String toUp(String filed){
-        if(Character.isUpperCase(filed.charAt(0))){
-            return filed;
-        } else {
-            return new StringBuilder().append(Character.toUpperCase(filed.charAt(0))).append(filed.substring(1)).toString();
-        }
-    }
+
 }
