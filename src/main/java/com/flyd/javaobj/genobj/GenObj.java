@@ -1,4 +1,4 @@
-package com.flyd.genobj;
+package com.flyd.javaobj.genobj;
 
 
 import com.flyd.utils.CustomClass;
@@ -28,6 +28,9 @@ public class GenObj {
             String result = javaBuilder.buildJava(className, fileds);
             writer.write(result);
             writer.flush();
+
+            //编译该java文件
+            JavaC.compilerJavaFile(className);
         } catch (IOException e) {
             e.printStackTrace();
         }

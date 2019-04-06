@@ -1,7 +1,7 @@
 package com.flyd;
 
-import com.flyd.genobj.GenObj;
-import com.flyd.loadobj.ExecMethod;
+import com.flyd.javaobj.genobj.GenObj;
+import com.flyd.javaobj.loadobj.ExecMethod;
 
 public class APP {
     public static void main(String[] args) throws InterruptedException {

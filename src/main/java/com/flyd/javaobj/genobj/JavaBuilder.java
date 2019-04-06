@@ -1,4 +1,4 @@
-package com.flyd.genobj;
+package com.flyd.javaobj.genobj;
 
 import com.flyd.utils.CharasetUtil;
 import com.flyd.utils.CustomClass;
